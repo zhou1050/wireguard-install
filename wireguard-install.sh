@@ -175,7 +175,7 @@ function installQuestions() {
 		echo -e "\nWireGuard uses a parameter called AllowedIPs to determine what is routed over the VPN."
 		read -rp "Allowed IPs list for generated clients (leave default to route everything): " -e -i '0.0.0.0/0,::/0' ALLOWED_IPS
 		if [[ ${ALLOWED_IPS} == "" ]]; then
-			ALLOWED_IPS="0.0.0.0/0,::/0"
+			ALLOWED_IPS="0.0.0.0/0,::/0\nPersistentKeepalive = 25"
 		fi
 	done
 

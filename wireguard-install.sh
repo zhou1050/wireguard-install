@@ -175,7 +175,7 @@ function installQuestions() {
 		echo -e "\nWireGuard uses a parameter called AllowedIPs to determine what is routed over the VPN."
 		read -rp "Allowed IPs list for generated clients (leave default to route everything): " -e -i '0.0.0.0/0,::/0' ALLOWED_IPS
 		if [[ ${ALLOWED_IPS} == "" ]]; then
-			ALLOWED_IPS="0.0.0.0/0,::/0\nPersistentKeepalive = 25"
+			ALLOWED_IPS="0.0.0.0/0,::/0"
 		fi
 	done
 
@@ -414,6 +414,7 @@ AllowedIPs = ${ALLOWED_IPS}" >"${HOME_DIR}/${SERVER_WG_NIC}-client-${CLIENT_NAME
 [Peer]
 PublicKey = ${CLIENT_PUB_KEY}
 PresharedKey = ${CLIENT_PRE_SHARED_KEY}
+PersistentKeepalive = 25
 AllowedIPs = ${CLIENT_WG_IPV4}/32,${CLIENT_WG_IPV6}/128" >>"/etc/wireguard/${SERVER_WG_NIC}.conf"
 
 	wg syncconf "${SERVER_WG_NIC}" <(wg-quick strip "${SERVER_WG_NIC}")
